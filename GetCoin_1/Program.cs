@@ -14,33 +14,36 @@ namespace GetCoin_1
     {
         static void Main(string[] args)
         {
-                  
+
             string web = "https://api.coinmarketcap.com/v1/ticker/?limit=2";
             WebRequest webRequest = WebRequest.Create(web);
             Stream stream = webRequest.GetResponse().GetResponseStream();
             StreamReader noValidJson = new StreamReader(stream); // получаем не валидный JSON в текстовой кодировке 
-            string validJson = "{items:"+ noValidJson.ReadToEnd() + "}"; // создаем валидный JSON 
+            string validJson = "{items:" + noValidJson.ReadToEnd() + "}"; // создаем валидный JSON 
             Console.WriteLine(validJson);
 
+
+            DataContractJsonSerializer allCoin = new DataContractJsonSerializer(typeof(CoinList));
+            MemoryStream memoryStream = new MemoryStream();
            
-            DataContractJsonSerializer coinStream = new DataContractJsonSerializer(typeof(string));
-            AllCoin1 allCoin = new AllCoin1();
-          //  string str = (string)coinStream.ReadObject(stream);
-            //allCoin = (AllCoin1)coinStream.ReadObject(stream);
-           // Console.WriteLine(allCoin.co[1].rank);
+            StreamWriter fg = new StreamWriter ()
+           
+            
+            
+            allCoin.ReadObject(validJsonStream);
+            
             Console.ReadLine();
         }
     }
 
 
 
-
-    public class AllCoin1
+    public class CoinList
     {
-        public Coin1[] co { get; set; }
+        public Coin[] items { get; set; }
     }
 
-    public class Coin1
+    public class Coin
     {
         public string id { get; set; }
         public string name { get; set; }
@@ -62,32 +65,8 @@ namespace GetCoin_1
 
 
 
-    public class InfoCoin
-    {
-        public bool success { get; set; }
-        public string message { get; set; }
-        public Coin[] result { get; set; }
-    }
-
-    public class Coin
-    {
-        public string MarketName { get; set; }
-        public float High { get; set; }
-        public float Low { get; set; }
-        public float Volume { get; set; }
-        public float Last { get; set; }
-        public float BaseVolume { get; set; }
-        public string TimeStamp { get; set; }
-        public float Bid { get; set; }
-        public float Ask { get; set; }
-        public int OpenBuyOrders { get; set; }
-        public int OpenSellOrders { get; set; }
-        public float PrevDay { get; set; }
-        public string Created { get; set; }
-    }
 
 
-   
 
 
 
