@@ -35,14 +35,60 @@ namespace GetCoin_1
             validJsonWriter.Write(validJson1);
             DataContractJsonSerializer allCoin = new DataContractJsonSerializer(typeof(CoinList));
 
+            //открываем файл для потока
+            FileStream JsonFile = new FileStream(@"C:\Users\1\Desktop\New\helloJson.txt", FileMode.Open);
+            //записывем в поток данные с файла
+            StreamWriter JsonWriter = new StreamWriter(JsonFile);
+            DataContractJsonSerializer newClass = new DataContractJsonSerializer(typeof(ArrayNewCoin));
+            
+            ArrayNewCoin beach = new ArrayNewCoin(5);
+            
+            Console.WriteLine(beach.items[3]);
+            Console.WriteLine(beach.name); 
+            beach.items[0] = 85;
+            beach.items[1] = 5;
+            beach.items[2] = 67;
+            //beach.items[0].name = "Bitcoin";
+            // beach.items[0].value = 10000;
+            //beach.items[1].name = "Verge";
+            // beach.items[1].value = 5;
+           // Console.WriteLine(beach.items[2]);
+            //newClass.WriteObject(JsonFile, beach);
+            JsonFile.Close();
 
-            allCoin.ReadObject(validJsonMemoryStream);
+            ArrayNewCoin afterJson = new ArrayNewCoin(5);
+            FileStream ft = new FileStream(@"C:\Users\1\Desktop\New\helloJson.txt", FileMode.Open);
+
+            
+            afterJson=(ArrayNewCoin) newClass.ReadObject(ft); 
+            Console.WriteLine(afterJson.items[2]);
+            
+            
+            //allCoin.ReadObject(validJsonMemoryStream);
 
             Console.ReadLine();
         }
     }
 
+    [DataContract]
+    class ArrayNewCoin
+    {   [DataMember]
+        public int [] items { get; set; }
+        public string name { get; set; }
+        public ArrayNewCoin(int n)
+        {
+            items = new int[n];
 
+        }
+    }
+
+    [DataContract]
+    class NewCoin
+    { [DataMember]
+       public string name { get; set; }
+        [DataMember]
+       public int value { get; set; }
+    }
 
     public class CoinList
     {
