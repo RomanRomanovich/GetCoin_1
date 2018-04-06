@@ -44,7 +44,9 @@ namespace GetCoin_1
             ArrayNewCoin beach = new ArrayNewCoin(5);
             
             Console.WriteLine(beach.items[3]);
-            Console.WriteLine(beach.name); 
+            beach.name = "hhhh";
+            Console.WriteLine(beach.name);
+           
             beach.items[0] = 85;
             beach.items[1] = 5;
             beach.items[2] = 67;
@@ -62,13 +64,27 @@ namespace GetCoin_1
             
             afterJson=(ArrayNewCoin) newClass.ReadObject(ft); 
             Console.WriteLine(afterJson.items[2]);
-            
-            
+
+
             //allCoin.ReadObject(validJsonMemoryStream);
 
+            // Инициализируем класс
+            CoinList coinList = new CoinList();
+            //coinList.items = new Coin [5];
+            //coinList.items[0].name = "bitcoin";
+            //coinList.items[1].name = "XVG";
+
+            ArrayNewCoin ftt = new ArrayNewCoin(5);
+            ftt.itemsfuck[1] = new fuck();
+            ftt.itemsfuck[0].pizda = 56;
             Console.ReadLine();
         }
     }
+
+
+
+
+
 
     [DataContract]
     class ArrayNewCoin
@@ -77,13 +93,21 @@ namespace GetCoin_1
         [DataMember]
         public string name { get; set; }
         [DataMember]
-        public int df { get; set; }
+        public fuck [] itemsfuck { get; set; }
+        public int xf { get; set; }
         public ArrayNewCoin(int n)
         {
             items = new int[n];
-
+            itemsfuck = new fuck [n];
         }
     }
+
+    [DataContract]
+    class fuck
+    {
+        public int pizda { get; set; }
+    }
+
 
     [DataContract]
     class NewCoin
@@ -93,9 +117,16 @@ namespace GetCoin_1
        public int value { get; set; }
     }
 
+
+    
     public class CoinList
     {
         public Coin[] items { get; set; }
+
+        public CoinList()
+        {
+            items = new Coin [3];
+        }
     }
 
     public class Coin
