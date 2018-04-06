@@ -53,7 +53,7 @@ namespace GetCoin_1
             //beach.items[1].name = "Verge";
             // beach.items[1].value = 5;
            // Console.WriteLine(beach.items[2]);
-            //newClass.WriteObject(JsonFile, beach);
+            newClass.WriteObject(JsonFile, beach);
             JsonFile.Close();
 
             ArrayNewCoin afterJson = new ArrayNewCoin(5);
@@ -74,7 +74,10 @@ namespace GetCoin_1
     class ArrayNewCoin
     {   [DataMember]
         public int [] items { get; set; }
+        [DataMember]
         public string name { get; set; }
+        [DataMember]
+        public int df { get; set; }
         public ArrayNewCoin(int n)
         {
             items = new int[n];
