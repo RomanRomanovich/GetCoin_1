@@ -39,7 +39,7 @@ namespace GetCoin_1
             FileStream JsonFile = new FileStream(@"C:\Users\1\Desktop\New\helloJson.txt", FileMode.Open);
             //записывем в поток данные с файла
             StreamWriter JsonWriter = new StreamWriter(JsonFile);
-            DataContractJsonSerializer newClass = new DataContractJsonSerializer(typeof(ArrayNewCoin));
+            DataContractJsonSerializer newClass = new DataContractJsonSerializer(typeof(CoinList));
             
             ArrayNewCoin beach = new ArrayNewCoin(5);
             
@@ -54,8 +54,12 @@ namespace GetCoin_1
             // beach.items[0].value = 10000;
             //beach.items[1].name = "Verge";
             // beach.items[1].value = 5;
-           // Console.WriteLine(beach.items[2]);
-            newClass.WriteObject(JsonFile, beach);
+            // Console.WriteLine(beach.items[2]);
+
+            CoinList fucklist = new CoinList();
+
+
+            newClass.WriteObject(JsonFile, fucklist);
             JsonFile.Close();
 
             ArrayNewCoin afterJson = new ArrayNewCoin(5);
@@ -76,7 +80,7 @@ namespace GetCoin_1
 
             ArrayNewCoin ftt = new ArrayNewCoin(5);
             ftt.itemsfuck[1] = new fuck();
-            ftt.itemsfuck[0].pizda = 56;
+            Console.WriteLine(ftt.itemsfuck[1].pizda = 56  ); 
             Console.ReadLine();
         }
     }
