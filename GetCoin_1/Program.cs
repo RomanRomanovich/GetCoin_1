@@ -19,19 +19,25 @@ namespace GetCoin_1
             WebRequest webRequest = WebRequest.Create(web);
             Stream stream = webRequest.GetResponse().GetResponseStream();
             StreamReader noValidJson = new StreamReader(stream); // получаем не валидный JSON в текстовой кодировке 
-            string validJson = "{items:" + noValidJson.ReadToEnd() + "}"; // создаем валидный JSON 
-            Console.WriteLine(validJson);
+            string validJson = "{\"items\":" + noValidJson.ReadToEnd() + "}"; // создаем валидный JSON 
+            
+            
+            //Console.WriteLine(validJson.Replace("\n","").Replace(" ",""));
+            string validJson1 = validJson.Replace("\n", "").Replace(" ", "");
+            //помещаем строку в поток
+            Console.WriteLine(validJson1);
 
 
+
+            MemoryStream validJsonMemoryStream = new MemoryStream();
+            StreamWriter validJsonWriter = new StreamWriter(validJsonMemoryStream);
+
+            validJsonWriter.Write(validJson1);
             DataContractJsonSerializer allCoin = new DataContractJsonSerializer(typeof(CoinList));
-            MemoryStream memoryStream = new MemoryStream();
-           
-            StreamWriter fg = new StreamWriter ()
-           
-            
-            
-            allCoin.ReadObject(validJsonStream);
-            
+
+
+            allCoin.ReadObject(validJsonMemoryStream);
+
             Console.ReadLine();
         }
     }
